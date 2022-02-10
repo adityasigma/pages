@@ -1,0 +1,26 @@
+<h1>Home Page</h1>
+<table>
+<!--    {% for rowval in results %}-->
+<!--    <tr>-->
+<!--        {% for val in rowval %}-->
+<!--        <td>{{val}}</td>-->
+<!--        {% endfor %}-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+</table>
+<script>
+$.ajax({
+                type: 'GET',
+                url: '/themodel/',
+                encode: true
+            })
+
+            .done(function(data){
+                data = JSON.parse(data);
+                if (data){
+                    console.log(data);
+                }
+            });
+
+        event.preventDefault();
+</script>
