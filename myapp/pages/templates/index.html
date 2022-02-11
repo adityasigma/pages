@@ -13,13 +13,18 @@
     crossorigin="anonymous"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<button type="button" class="btn btn-primary">Get</button>
+<button type="button" class="btn btn-success">Post</button>
+<button type="button" class="btn btn-info">Put</button>
+<button type="button" class="btn btn-danger">Delete</button>
+
 <table class="table" id="userTable">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">No.</th>
+            <th scope="col">Username</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
         </tr>
     </thead>
     <tbody>
@@ -65,19 +70,26 @@
         $.ajax({
             type: "GET",
             url: "/themodel/",
-            success: function (data) {
+            // success: function (data) {
                 
-                $("#userTable tbody").html("<tr>" +
-                    "<td>My First Video</td>" +
-                    "<td>6/11/2015</td>" +
-                    "<td>www.pluralsight.com</td>" +
-                    "</tr>");
-                console.log(data)
-                data.map(i => console.log(i.id))
-                for (item in data){
-                    console.log(item.id)
-                }
-            }
+            //     $("#userTable tbody").html("<tr>" +
+            //         "<td>My First Video</td>" +
+            //         "<td>6/11/2015</td>" +
+            //         "<td>www.pluralsight.com</td>" +
+            //         "</tr>");
+            //     console.log(data)
+            //     data.map(i => console.log(i.id))
+            //     for (item in data){
+            //         console.log(item.id)
+            //     }
+            // }
+            success: function (response) {
+            var trHTML = '';
+            $.each(response, function (i, item) {
+                trHTML += '<tr><td>' + item.id + '</td><td>' + item.username + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td></tr>';
+            });
+            $('#userTable tbody').append(trHTML);
+    }
         });
     }
 </script>

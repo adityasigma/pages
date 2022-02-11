@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
 from django.core import serializers
+from .serializers import UserSerializer
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -11,9 +12,12 @@ def TheModelView(request):
 
     if (request.method == "GET"):
         #Serialize the data into json
-        data = serializers.serialize("json", User.objects.all())
+        # data = UserSerializer("json", User.objects.all())
+        user_obj = User.objects.all()
+        user_serializer = UserSerializer(user_obj, many=True)
+        return JsonResponse(user_serializer.data, safe=False) 
         # Turn the JSON data into a dict and send as JSON response
-        return JsonResponse(json.loads(data), safe=False)
+        # return JsonResponse(json.loads(data), safe=False)
         # html = "<html><body><h1>WORKING</h1></body></html>"
         #
         # return HttpResponse(html)
