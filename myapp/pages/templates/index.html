@@ -3,207 +3,278 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <style>
-            textarea{
-                width:250px;
-                height:250px;
-                white-space: pre;
-                word-wrap: normal;
-                overflow-x: scroll;
-            }
-        </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        textarea {
+            width: 250px;
+            height: 250px;
+            white-space: pre;
+            word-wrap: normal;
+            overflow-x: scroll;
+        }
+    </style>
 
-        <table class="table" id="userTable">
-            <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- <tr>
+    <table class="table" id="userTable">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                 </tr> -->
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-        <div class="d-flex justify-content-between">
-            <div class="card d-flex justify-content-between" style="width: 18rem;">
-                <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Request</h6>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
-                        <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Username">
-                            <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Password">
-                                <input type="email" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" placeholder="First Name">
-                                    <input type="email" class="form-control" id="exampleInputEmail5" aria-describedby="emailHelp" placeholder="Last Name">
+    <div class="d-flex justify-content-between">
+        <div class="card d-flex justify-content-between" style="width: 18rem;">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Request</h6>
+                <form method="post">
+                {% csrf_token %}
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Id">
+                <input type="email" class="form-control" id="exampleInputEmail2" name="username"
+                    aria-describedby="emailHelp" placeholder="Username">
+                <input type="email" class="form-control" id="exampleInputEmail3" name="password"
+                    aria-describedby="emailHelp" placeholder="Password">
+                <input type="email" class="form-control" id="exampleInputEmail4" name="first_name"
+                    aria-describedby="emailHelp" placeholder="First Name">
+                <input type="email" class="form-control" id="exampleInputEmail5" name="last_name"
+                    aria-describedby="emailHelp" placeholder="Last Name">
 
-                                        <!-- <a href="#" class="card-link">Card link</a>
+                <!-- <a href="#" class="card-link">Card link</a>
                                         <a href="#" class="card-link">Another link</a> -->
-                                        <input class="btn btn-dark" id="submit1" type="button" value="Submit" onclick="GetAPICall()" />
-                                        <input class="btn btn-dark" id="submit2" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
-                                        <input class="btn btn-dark" id="submit3" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
-                                        <input class="btn btn-dark" id="submit4" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
-                                    </div>
-                                </div>
-                                <div style="width: 18rem;">
-                                    <input class="btn btn-primary" type="button" value="Get" onclick="ShowHideDivGet(this)" />
-                                    <input class="btn btn-success" type="button" value="Post" onclick="ShowHideDivPost(this)" />
-                                    <input class="btn btn-info" type="button" value="Put" onclick="ShowHideDivPut(this)" />
-                                    <input class="btn btn-danger" type="button" value="Delete" onclick="ShowHideDivDelete(this)" />
-                                </div>
+                <input class="btn btn-dark" id="submit1" type="button" value="Submit" onclick="GetAPICall()" />
+                <input class="btn btn-dark" id="submit2" type="button" value="Submit" onclick="PostAPICall()" />
+                <input class="btn btn-dark" id="submit3" type="button" value="Submit" onclick="PutAPICall()" />
+                <input class="btn btn-dark" id="submit4" type="button" value="Submit" onclick="DeleteAPICall()" />
+                </form>
+            </div>
+        </div>
+        <div style="width: 18rem;">
+            <input class="btn btn-primary" type="button" value="Get" onclick="ShowHideDivGet(this)" />
+            <input class="btn btn-success" type="button" value="Post" onclick="ShowHideDivPost(this)" />
+            <input class="btn btn-info" type="button" value="Put" onclick="ShowHideDivPut(this)" />
+            <input class="btn btn-danger" type="button" value="Delete" onclick="ShowHideDivDelete(this)" />
+        </div>
 
-                                <div class="card" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle mb-2 text-muted">Response</h6>
-                                        <div id="res_id"></div>
-                                        <textarea wrap="hard">
-                                        </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <script>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Response</h6>
+                <div id="res_id"></div>
+                <textarea wrap="hard">
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
 
-                            function GetAPICall() {
-                                
-                                var Id = document.getElementById('exampleInputEmail1').value;
+<script>
 
-                                $.ajax({
-                                    type: "GET",
-                                    url: "/users_list/" + Id,
 
-                                    success: function (response) {
-                                        console.log(response)
-                                        $('textarea').text(JSON.stringify(response,null,'\t'));
-                                        // $('#res_id').append(html);
-                                    }
-                                });
-                            }
 
-                            function ShowHideDivGet(btnPassport) {
-                                $("#exampleInputEmail1").show();
-                                $("#exampleInputEmail2").hide();
-                                $("#exampleInputEmail3").hide();
-                                $("#exampleInputEmail4").hide();
-                                $("#exampleInputEmail5").hide();
-                                $("#submit1").show();
-                                $("#submit2").hide();
-                                $("#submit3").hide();
-                                $("#submit4").hide();
-                            }
-
-                            function ShowHideDivPost(btnPassport) {
-                                $("#exampleInputEmail1").hide();
-                                $("#exampleInputEmail2").show();
-                                $("#exampleInputEmail3").show();
-                                $("#exampleInputEmail4").show();
-                                $("#exampleInputEmail5").show();
-                                $("#submit2").show();
-                                $("#submit1").hide();
-                                $("#submit3").hide();
-                                $("#submit4").hide();
-                            }
-
-                            function ShowHideDivPut(btnPassport) {
-                                $("#exampleInputEmail1").show();
-                                $("#exampleInputEmail2").show();
-                                $("#exampleInputEmail3").show();
-                                $("#exampleInputEmail4").show();
-                                $("#exampleInputEmail5").show();
-                                $("#submit3").show();
-                                $("#submit2").hide();
-                                $("#submit1").hide();
-                                $("#submit4").hide();
-                            }
-
-                            function ShowHideDivDelete(btnPassport) {
-                                $("#exampleInputEmail1").show();
-                                $("#exampleInputEmail2").hide();
-                                $("#exampleInputEmail3").hide();
-                                $("#exampleInputEmail4").hide();
-                                $("#exampleInputEmail5").hide();
-                                $("#submit4").show();
-                                $("#submit2").hide();
-                                $("#submit3").hide();
-                                $("#submit1").hide();
-                            }
-
-                            $(document).ready(function () {
-                                //This will execute onload oof your web page what you required
-                                getUserList();
-                                $("#exampleInputEmail1").hide();
-                                $("#exampleInputEmail2").hide();
-                                $("#exampleInputEmail3").hide();
-                                $("#exampleInputEmail4").hide();
-                                $("#exampleInputEmail5").hide();
-                                $("#submit1").hide();
-                                $("#submit2").hide();
-                                $("#submit3").hide();
-                                $("#submit4").hide();
+    $(document).ready(function () {
+        //This will execute onload oof your web page what you required
+        getUserList();
+        $("#exampleInputEmail1").hide();
+        $("#exampleInputEmail2").hide();
+        $("#exampleInputEmail3").hide();
+        $("#exampleInputEmail4").hide();
+        $("#exampleInputEmail5").hide();
+        $("#submit1").hide();
+        $("#submit2").hide();
+        $("#submit3").hide();
+        $("#submit4").hide();
     })
 
-                            function getUserList() {
-                                // $.ajax({
-                                //     type: 'GET',
-                                //     url: '/themodel/',
-                                //     encode: true
-                                // })
-
-                                //     .done(function (data) {
-                                //         // data = JSON.parse(data);
-                                //         console.log(data)
-
-                                //         // if (data['status'] == 'success') {
-
-                                //         // }
-                                //         // else {
-
-                                //         // }
-
-                                //     });
-
-                                // event.preventDefault();
-
-
-                                $.ajax({
-                                    type: "GET",
-                                    url: "/all_users_list/",
-                                    // success: function (data) {
-
-                                    //     $("#userTable tbody").html("<tr>" +
-                                    //         "<td>My First Video</td>" +
-                                    //         "<td>6/11/2015</td>" +
-                                    //         "<td>www.pluralsight.com</td>" +
-                                    //         "</tr>");
-                                    //     console.log(data)
-                                    //     data.map(i => console.log(i.id))
-                                    //     for (item in data){
-                                    //         console.log(item.id)
-                                    //     }
-                                    // }
-                                    success: function (response) {
-                                        var trHTML = '';
-                                        $.each(response, function (i, item) {
-                                            trHTML += '<tr><td>' + item.id + '</td><td>' + item.username + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td></tr>';
-                                        });
-                                        $('#userTable tbody').append(trHTML);
-                                    }
-                                });
+    function getUserList() {
+        $.ajax({
+            type: "GET",
+            url: "/all_users_list/",
+            success: function (response) {
+                $('#userTable tbody').empty();
+                var trHTML = '';
+                $.each(response, function (i, item) {
+                    trHTML += '<tr><td>' + item.id + '</td><td>' + item.username + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td></tr>';
+                });
+                $('#userTable tbody').append(trHTML);
+            }
+        });
     }
-                        </script>
+
+    function GetAPICall() {
+
+        var Id = document.getElementById('exampleInputEmail1').value;
+
+        $.ajax({
+            type: "GET",
+            url: "/users_list/" + Id,
+
+            success: function (response) {
+                console.log(response)
+                $('textarea').text(JSON.stringify(response, null, '\t'));
+                getUserList();
+            }
+        });
+    }
+
+    function PostAPICall() {
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+
+        var formData = {
+            'username': $('input[name=username]').val(),
+            'password': $('input[name=password]').val(),
+            'first_name': $('input[name=first_name]').val(),
+            'last_name': $('input[name=last_name]').val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/users_list/",
+            headers:{"X-CSRFToken": $crf_token},
+            data: formData,
+
+            success: function (response) {
+                console.log(response)
+                $('textarea').text(JSON.stringify(response, null, '\t'));
+                getUserList();
+            }
+        });
+    }
+
+    function PutAPICall() {
+
+        var Id = document.getElementById('exampleInputEmail1').value;
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+
+        var formData = {
+            'username': $('input[name=username]').val(),
+            'password': $('input[name=password]').val(),
+            'first_name': $('input[name=first_name]').val(),
+            'last_name': $('input[name=last_name]').val(),
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "/users_list/" + Id,
+            headers:{"X-CSRFToken": $crf_token},
+            data: formData,
+
+            success: function (response) {
+                console.log(response)
+                $('textarea').text(JSON.stringify(response, null, '\t'));
+                getUserList();
+            }
+        });
+    }
+
+    function DeleteAPICall() {
+
+        var Id = document.getElementById('exampleInputEmail1').value;
+        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
+
+        $.ajax({
+            type: "DELETE",
+            url: "/users_list/" + Id,
+            headers:{"X-CSRFToken": $crf_token},
+            // data: formData,
+
+            success: function (response) {
+                console.log(response);
+                $('textarea').text(JSON.stringify(response, null, '\t'));
+                getUserList();
+            },
+
+            error: function (response) {
+                console.log(response);
+                $('textarea').text(JSON.stringify(response, null, '\t'));
+                getUserList();
+            }
+        });
+    }
+
+    function ShowHideDivGet(btnPassport) {
+        $("#exampleInputEmail1").show();
+        $("#exampleInputEmail2").hide();
+        $("#exampleInputEmail3").hide();
+        $("#exampleInputEmail4").hide();
+        $("#exampleInputEmail5").hide();
+        $("#submit1").show();
+        $("#submit2").hide();
+        $("#submit3").hide();
+        $("#submit4").hide();
+        document.getElementById('exampleInputEmail1').value = null;
+        document.getElementById('exampleInputEmail2').value = null;
+        document.getElementById('exampleInputEmail3').value = null;
+        document.getElementById('exampleInputEmail4').value = null;
+        document.getElementById('exampleInputEmail5').value = null;
+    }
+
+    function ShowHideDivPost(btnPassport) {
+        $("#exampleInputEmail1").hide();
+        $("#exampleInputEmail2").show();
+        $("#exampleInputEmail3").show();
+        $("#exampleInputEmail4").show();
+        $("#exampleInputEmail5").show();
+        $("#submit2").show();
+        $("#submit1").hide();
+        $("#submit3").hide();
+        $("#submit4").hide();
+        document.getElementById('exampleInputEmail1').value = null;
+        document.getElementById('exampleInputEmail2').value = null;
+        document.getElementById('exampleInputEmail3').value = null;
+        document.getElementById('exampleInputEmail4').value = null;
+        document.getElementById('exampleInputEmail5').value = null;
+    }
+
+    function ShowHideDivPut(btnPassport) {
+        $("#exampleInputEmail1").show();
+        $("#exampleInputEmail2").show();
+        $("#exampleInputEmail3").show();
+        $("#exampleInputEmail4").show();
+        $("#exampleInputEmail5").show();
+        $("#submit3").show();
+        $("#submit2").hide();
+        $("#submit1").hide();
+        $("#submit4").hide();
+        document.getElementById('exampleInputEmail1').value = null;
+        document.getElementById('exampleInputEmail2').value = null;
+        document.getElementById('exampleInputEmail3').value = null;
+        document.getElementById('exampleInputEmail4').value = null;
+        document.getElementById('exampleInputEmail5').value = null;
+    }
+
+    function ShowHideDivDelete(btnPassport) {
+        $("#exampleInputEmail1").show();
+        $("#exampleInputEmail2").hide();
+        $("#exampleInputEmail3").hide();
+        $("#exampleInputEmail4").hide();
+        $("#exampleInputEmail5").hide();
+        $("#submit4").show();
+        $("#submit2").hide();
+        $("#submit3").hide();
+        $("#submit1").hide();
+        document.getElementById('exampleInputEmail1').value = null;
+        document.getElementById('exampleInputEmail2').value = null;
+        document.getElementById('exampleInputEmail3').value = null;
+        document.getElementById('exampleInputEmail4').value = null;
+        document.getElementById('exampleInputEmail5').value = null;
+    }
+</script>
