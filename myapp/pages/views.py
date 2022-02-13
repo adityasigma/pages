@@ -17,17 +17,17 @@ class AllUserView(APIView):
             user_serializer = UserSerializer(user_obj, many=True)
             return JsonResponse(user_serializer.data, safe=False)
         except User.DoesNotExist: 
-            return JsonResponse({'message': 'The user data does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+            return JsonResponse({'message': 'The user data does not exist'}, safe=False) 
 
 class UserView(APIView):
 
     def get(self, request, id):
         try: 
-            user_obj = User.objects.filter(id=id) 
-            user_serializer = UserSerializer(user_obj, many=True)
+            user_obj = User.objects.get(id=id)
+            user_serializer = UserSerializer(user_obj)
             return JsonResponse(user_serializer.data, safe=False)
         except User.DoesNotExist: 
-            return JsonResponse({'message': 'The user data does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+            return JsonResponse({'message': 'The user data does not exist'}, safe=False) 
 
     def post(self, request, *args, **kwargs):
         user_serializer = UserSerializer(data=request.data)
@@ -35,7 +35,7 @@ class UserView(APIView):
             user_serializer.save()
             return Response(user_serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(user_serializer.errors, safe=False) 
 
     def put(self, request, id):
         user = User.objects.get(id=id) 
@@ -43,12 +43,13 @@ class UserView(APIView):
         if user_serializer.is_valid(): 
             user_serializer.save() 
             return JsonResponse(user_serializer.data) 
-        return JsonResponse(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+        return JsonResponse(user_serializer.errors, safe=False) 
 
     def delete(self, request, id):
         try:
             user = User.objects.get(id=id)
             user.delete() 
-            return JsonResponse({'message': 'User deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+            # return JsonResponse({'message': 'User deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+            return JsonResponse({'message': 'User deleted successfully!'}, safe=False)
         except User.DoesNotExist: 
-            return JsonResponse({'message': 'The user does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+            return JsonResponse({'message': 'The user does not exist'}, safe=False) 
