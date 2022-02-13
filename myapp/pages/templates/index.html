@@ -136,19 +136,17 @@
     }
 
     function PostAPICall() {
-        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
         var formData = {
             'username': $('input[name=username]').val(),
             'password': $('input[name=password]').val(),
             'first_name': $('input[name=first_name]').val(),
-            'last_name': $('input[name=last_name]').val(),
+            'last_name': $('input[name=last_name]').val()
         };
 
         $.ajax({
             type: "POST",
             url: "/users_list/",
-            headers:{"X-CSRFToken": $crf_token},
             data: formData,
 
             success: function (response) {
@@ -162,19 +160,17 @@
     function PutAPICall() {
 
         var Id = document.getElementById('exampleInputEmail1').value;
-        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
         var formData = {
             'username': $('input[name=username]').val(),
             'password': $('input[name=password]').val(),
             'first_name': $('input[name=first_name]').val(),
-            'last_name': $('input[name=last_name]').val(),
+            'last_name': $('input[name=last_name]').val()
         };
 
         $.ajax({
             type: "PUT",
             url: "/users_list/" + Id,
-            headers:{"X-CSRFToken": $crf_token},
             data: formData,
 
             success: function (response) {
@@ -188,13 +184,10 @@
     function DeleteAPICall() {
 
         var Id = document.getElementById('exampleInputEmail1').value;
-        var $crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
         $.ajax({
             type: "DELETE",
             url: "/users_list/" + Id,
-            headers:{"X-CSRFToken": $crf_token},
-            // data: formData,
 
             success: function (response) {
                 console.log(response);
