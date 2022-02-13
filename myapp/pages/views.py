@@ -10,11 +10,20 @@ from rest_framework import status
 def index(request):
     return render(request, 'index.html')
 
-class UserView(APIView):
-
+class AllUserView(APIView):
     def get(self, request):
         try: 
             user_obj = User.objects.all()
+            user_serializer = UserSerializer(user_obj, many=True)
+            return JsonResponse(user_serializer.data, safe=False)
+        except User.DoesNotExist: 
+            return JsonResponse({'message': 'The user data does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+
+class UserView(APIView):
+
+    def get(self, request, id):
+        try: 
+            user_obj = User.objects.filter(id=id) 
             user_serializer = UserSerializer(user_obj, many=True)
             return JsonResponse(user_serializer.data, safe=False)
         except User.DoesNotExist: 

@@ -1,95 +1,209 @@
-<h1>Home Page</h1>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<div class="container">
+    <h1>Home Page</h1>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <style>
+            textarea{
+                width:250px;
+                height:250px;
+                white-space: pre;
+                word-wrap: normal;
+                overflow-x: scroll;
+            }
+        </style>
 
-<button type="button" class="btn btn-primary">Get</button>
-<button type="button" class="btn btn-success">Post</button>
-<button type="button" class="btn btn-info">Put</button>
-<button type="button" class="btn btn-danger">Delete</button>
+        <table class="table" id="userTable">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr> -->
+            </tbody>
+        </table>
 
-<table class="table" id="userTable">
-    <thead>
-        <tr>
-            <th scope="col">No.</th>
-            <th scope="col">Username</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr> -->
-    </tbody>
-</table>
+        <div class="d-flex justify-content-between">
+            <div class="card d-flex justify-content-between" style="width: 18rem;">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Request</h6>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
+                        <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Username">
+                            <input type="email" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Password">
+                                <input type="email" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" placeholder="First Name">
+                                    <input type="email" class="form-control" id="exampleInputEmail5" aria-describedby="emailHelp" placeholder="Last Name">
 
-<script>
+                                        <!-- <a href="#" class="card-link">Card link</a>
+                                        <a href="#" class="card-link">Another link</a> -->
+                                        <input class="btn btn-dark" id="submit1" type="button" value="Submit" onclick="GetAPICall()" />
+                                        <input class="btn btn-dark" id="submit2" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
+                                        <input class="btn btn-dark" id="submit3" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
+                                        <input class="btn btn-dark" id="submit4" type="button" value="Submit" onclick="ShowHideDivGet(this)" />
+                                    </div>
+                                </div>
+                                <div style="width: 18rem;">
+                                    <input class="btn btn-primary" type="button" value="Get" onclick="ShowHideDivGet(this)" />
+                                    <input class="btn btn-success" type="button" value="Post" onclick="ShowHideDivPost(this)" />
+                                    <input class="btn btn-info" type="button" value="Put" onclick="ShowHideDivPut(this)" />
+                                    <input class="btn btn-danger" type="button" value="Delete" onclick="ShowHideDivDelete(this)" />
+                                </div>
 
-    $(document).ready(function () {
-        //This will execute onload oof your web page what you required
-        getUserList();
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Response</h6>
+                                        <div id="res_id"></div>
+                                        <textarea wrap="hard">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <script>
+
+                            function GetAPICall() {
+                                
+                                var Id = document.getElementById('exampleInputEmail1').value;
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/users_list/" + Id,
+
+                                    success: function (response) {
+                                        console.log(response)
+                                        $('textarea').text(JSON.stringify(response,null,'\t'));
+                                        // $('#res_id').append(html);
+                                    }
+                                });
+                            }
+
+                            function ShowHideDivGet(btnPassport) {
+                                $("#exampleInputEmail1").show();
+                                $("#exampleInputEmail2").hide();
+                                $("#exampleInputEmail3").hide();
+                                $("#exampleInputEmail4").hide();
+                                $("#exampleInputEmail5").hide();
+                                $("#submit1").show();
+                                $("#submit2").hide();
+                                $("#submit3").hide();
+                                $("#submit4").hide();
+                            }
+
+                            function ShowHideDivPost(btnPassport) {
+                                $("#exampleInputEmail1").hide();
+                                $("#exampleInputEmail2").show();
+                                $("#exampleInputEmail3").show();
+                                $("#exampleInputEmail4").show();
+                                $("#exampleInputEmail5").show();
+                                $("#submit2").show();
+                                $("#submit1").hide();
+                                $("#submit3").hide();
+                                $("#submit4").hide();
+                            }
+
+                            function ShowHideDivPut(btnPassport) {
+                                $("#exampleInputEmail1").show();
+                                $("#exampleInputEmail2").show();
+                                $("#exampleInputEmail3").show();
+                                $("#exampleInputEmail4").show();
+                                $("#exampleInputEmail5").show();
+                                $("#submit3").show();
+                                $("#submit2").hide();
+                                $("#submit1").hide();
+                                $("#submit4").hide();
+                            }
+
+                            function ShowHideDivDelete(btnPassport) {
+                                $("#exampleInputEmail1").show();
+                                $("#exampleInputEmail2").hide();
+                                $("#exampleInputEmail3").hide();
+                                $("#exampleInputEmail4").hide();
+                                $("#exampleInputEmail5").hide();
+                                $("#submit4").show();
+                                $("#submit2").hide();
+                                $("#submit3").hide();
+                                $("#submit1").hide();
+                            }
+
+                            $(document).ready(function () {
+                                //This will execute onload oof your web page what you required
+                                getUserList();
+                                $("#exampleInputEmail1").hide();
+                                $("#exampleInputEmail2").hide();
+                                $("#exampleInputEmail3").hide();
+                                $("#exampleInputEmail4").hide();
+                                $("#exampleInputEmail5").hide();
+                                $("#submit1").hide();
+                                $("#submit2").hide();
+                                $("#submit3").hide();
+                                $("#submit4").hide();
     })
 
-    function getUserList() {
-        // $.ajax({
-        //     type: 'GET',
-        //     url: '/themodel/',
-        //     encode: true
-        // })
+                            function getUserList() {
+                                // $.ajax({
+                                //     type: 'GET',
+                                //     url: '/themodel/',
+                                //     encode: true
+                                // })
 
-        //     .done(function (data) {
-        //         // data = JSON.parse(data);
-        //         console.log(data)
+                                //     .done(function (data) {
+                                //         // data = JSON.parse(data);
+                                //         console.log(data)
 
-        //         // if (data['status'] == 'success') {
-                    
-        //         // }
-        //         // else {
+                                //         // if (data['status'] == 'success') {
 
-        //         // }
+                                //         // }
+                                //         // else {
 
-        //     });
+                                //         // }
 
-        // event.preventDefault();
+                                //     });
+
+                                // event.preventDefault();
 
 
-        $.ajax({
-            type: "GET",
-            url: "/themodel/",
-            // success: function (data) {
-                
-            //     $("#userTable tbody").html("<tr>" +
-            //         "<td>My First Video</td>" +
-            //         "<td>6/11/2015</td>" +
-            //         "<td>www.pluralsight.com</td>" +
-            //         "</tr>");
-            //     console.log(data)
-            //     data.map(i => console.log(i.id))
-            //     for (item in data){
-            //         console.log(item.id)
-            //     }
-            // }
-            success: function (response) {
-            var trHTML = '';
-            $.each(response, function (i, item) {
-                trHTML += '<tr><td>' + item.id + '</td><td>' + item.username + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td></tr>';
-            });
-            $('#userTable tbody').append(trHTML);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/all_users_list/",
+                                    // success: function (data) {
+
+                                    //     $("#userTable tbody").html("<tr>" +
+                                    //         "<td>My First Video</td>" +
+                                    //         "<td>6/11/2015</td>" +
+                                    //         "<td>www.pluralsight.com</td>" +
+                                    //         "</tr>");
+                                    //     console.log(data)
+                                    //     data.map(i => console.log(i.id))
+                                    //     for (item in data){
+                                    //         console.log(item.id)
+                                    //     }
+                                    // }
+                                    success: function (response) {
+                                        var trHTML = '';
+                                        $.each(response, function (i, item) {
+                                            trHTML += '<tr><td>' + item.id + '</td><td>' + item.username + '</td><td>' + item.first_name + '</td><td>' + item.last_name + '</td></tr>';
+                                        });
+                                        $('#userTable tbody').append(trHTML);
+                                    }
+                                });
     }
-        });
-    }
-</script>
+                        </script>
