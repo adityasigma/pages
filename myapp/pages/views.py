@@ -19,7 +19,6 @@ class AllUserView(APIView):
     def get(self, request):
         try: 
             user_obj = User.objects.all()
-            print(user_obj, '*******************')
             user_serializer = UserSerializer(user_obj, many=True)
             return JsonResponse(user_serializer.data, safe=False)
         except User.DoesNotExist: 
@@ -30,15 +29,17 @@ class UserView(APIView):
     def get(self, request, id):
         try:
             start_time = datetime.datetime.now()
-            print(start_time)
+            json_data = json.dumps(id)
             user_obj = User.objects.get(id=id)
             user_serializer = UserSerializer(user_obj)
             end_time = datetime.datetime.now()
-            print(end_time)
-            log = Logs(request_type='Get', request_body=id, request_time=str(start_time),response=user_serializer.data, response_time=str(end_time))
+            log = Logs(request_type='Get', request_body=json_data, request_time=str(start_time),response=user_serializer.data, response_time=str(end_time))
             log.save()
             return JsonResponse(user_serializer.data, safe=False)
         except User.DoesNotExist: 
+            end_time = datetime.datetime.now()
+            log = Logs(request_type='Get', request_body=json_data, request_time=str(start_time),response={'message': 'The user does not exist'}, response_time=str(end_time))
+            log.save()
             return JsonResponse({'message': 'The user data does not exist'}, safe=False) 
 
     def post(self, request, *args, **kwargs):
@@ -58,17 +59,27 @@ class UserView(APIView):
             return JsonResponse(user_serializer.errors, safe=False) 
 
     def put(self, request, id):
-        start_time = datetime.datetime.now()
-        user = User.objects.get(id=id) 
-        user_serializer = UserSerializer(user, data=request.data) 
-        json_data = json.dumps(request.data)
-        if user_serializer.is_valid(): 
-            user_serializer.save() 
+        try:
+            start_time = datetime.datetime.now()
+            json_data = json.dumps(request.data)
+            user = User.objects.get(id=id) 
+            user_serializer = UserSerializer(user, data=request.data) 
+            if user_serializer.is_valid(): 
+                user_serializer.save() 
+                end_time = datetime.datetime.now()
+                log = Logs(request_type='Put', request_body=json_data, request_time=str(start_time),response=user_serializer.data, response_time=str(end_time))
+                log.save()
+                return JsonResponse(user_serializer.data) 
+            else:
+                end_time = datetime.datetime.now()
+                log = Logs(request_type='Put', request_body=json_data, request_time=str(start_time),response={'message': 'The user does not exist'}, response_time=str(end_time))
+                log.save()
+                return JsonResponse(user_serializer.errors, safe=False) 
+        except User.DoesNotExist: 
             end_time = datetime.datetime.now()
-            log = Logs(request_type='Put', request_body=json_data, request_time=str(start_time),response=user_serializer.data, response_time=str(end_time))
+            log = Logs(request_type='Put', request_body=json_data, request_time=str(start_time),response={'message': 'The user does not exist'}, response_time=str(end_time))
             log.save()
-            return JsonResponse(user_serializer.data) 
-        return JsonResponse(user_serializer.errors, safe=False) 
+            return JsonResponse({'message': 'The user does not exist'}, safe=False) 
 
     def delete(self, request, id):
         try:
@@ -92,8 +103,6 @@ class logView(APIView):
     def get(self, request):
         try: 
             log_obj = Logs.objects.all()
-            print(reversed(log_obj))
-            # print(user_obj, '*******************')
             log_serializer = LogSerializer(log_obj, many=True)
             return JsonResponse(log_serializer.data, safe=False)
         except Logs.DoesNotExist: 

@@ -210,7 +210,6 @@ table {
                 $('#logTable').dataTable().fnDraw();
                 $('#logTable').dataTable().fnDestroy();
                 var trHTML = '';
-                console.log(response) 
                 $.each(response, function (i, item)
                 {
                     trHTML += '<tr><td>' + item.id + '</td><td>' + item.request_type + '</td><td>' + item.request_body + '</td><td>' + item.request_time + '</td><td>'+ item.response + '</td><td>'+ item.response_time + '</td></tr>';
@@ -231,7 +230,6 @@ table {
             url: "/users_list/" + Id,
 
             success: function (response) {
-                console.log(response)
                 $('textarea').text(JSON.stringify(response, null, '\t'));
                 getUserList();
                 getLogList();
@@ -256,7 +254,6 @@ table {
             data: formData,
 
             success: function (response) {
-                console.log(response)
                 $('textarea').text(JSON.stringify(response, null, '\t'));
                 getUserList();
                 getLogList();
@@ -284,7 +281,6 @@ table {
             data: formData,
 
             success: function (response) {
-                console.log(response)
                 $('textarea').text(JSON.stringify(response, null, '\t'));
                 getUserList();
                 getLogList();
@@ -304,14 +300,12 @@ table {
             // data: formData,
 
             success: function (response) {
-                console.log(response);
                 $('textarea').text(JSON.stringify(response, null, '\t'));
                 getUserList();
                 getLogList();
             },
 
             error: function (response) {
-                console.log(response);
                 $('textarea').text(JSON.stringify(response, null, '\t'));
                 getUserList();
             }
